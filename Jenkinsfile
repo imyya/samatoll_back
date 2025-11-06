@@ -28,7 +28,7 @@
         steps {
           script {
             // Use a temporary SQLite DB so the app can boot
-            def cid = sh(script: "docker run -d -e DATABASE_URL=sqlite:\/\/\/\/tmp\/test.db -p 8000:8000 ${IMAGE_NAME}:${IMAGE_TAG}", returnStdout: true).trim()
+            def cid = sh(script: 'docker run -d -e DATABASE_URL=sqlite:////tmp/test.db -p 8000:8000 ' + "${IMAGE_NAME}:${IMAGE_TAG}", returnStdout: true).trim()
             try {
               // Wait a bit for the server to start
               sh 'sleep 3'

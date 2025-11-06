@@ -11,3 +11,7 @@ Base.metadata.create_all(bind=engine)
 
 #   app.include_router(users.router)
 app.include_router(notifications.router)    
+
+@app.get("/health")
+def health():
+    return {"status": "ok working girl"}

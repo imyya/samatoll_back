@@ -8,7 +8,6 @@
 
     options {
       timestamps()
-      ansiColor('xterm')
     }
 
     stages {

@@ -60,7 +60,7 @@
                 }
                 
                 // Final health check
-                sh 'curl -sSf http://${containerIp}:8000/health >/dev/null'
+                sh "curl -sSf http://${containerIp}:8000/health >/dev/null"
               } finally {
                 // Show logs before cleanup
                 sh "docker logs ${cid} || true"

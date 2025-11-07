@@ -26,16 +26,13 @@
         stage('Smoke Test') {
           steps {
             script {
-              // Use a temporary SQLite DB so the app can boot
               def cid = sh(script: 'docker run -d -e DATABASE_URL=sqlite:////tmp/test.db -p 8000:8000 ' + "${IMAGE_NAME}:${IMAGE_TAG}", returnStdout: true).trim()
-                // Récupérer l'IP du container
               def containerIp = sh(
               script: "docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' ${cid}",
               returnStdout: true).trim()
               echo "Container ID: ${cid}"
               echo "Container IP: ${containerIp}"
               try {
-                // Wait for server to be ready with retries
                 def maxRetries = 30
                 def retryCount = 0
                 def ready = false
@@ -53,16 +50,13 @@
                 }
                 
                 if (!ready) {
-                  // Show container logs for debugging
                   echo "Server failed to start on Health aget ${maxRetries}. Container logs:"
                   sh "docker logs ${cid}"
                   error("Server did not become ready after ${maxRetries} retries")
                 }
                 
-                // Final health check
                 sh "curl -sSf http://${containerIp}:8000/health >/dev/null"
               } finally {
-                // Show logs before cleanup
                 sh "docker logs ${cid} || true"
                 sh "docker rm -f ${cid} || true"
               }

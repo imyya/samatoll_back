@@ -1,0 +1,39 @@
+==================================================
+RÉSUMÉ DU MEILLEUR MODÈLE
+==================================================
+
+📅 Date d'entraînement: 2025-11-07 12:46:35
+🏆 Modèle: XGBoost
+📊 Performance:
+   - RMSE: 3.79
+   - MAE: 2.51
+   - R²: 0.9682
+
+📈 Données:
+   - Échantillons d'entraînement: 612
+   - Échantillons de test: 153
+
+🔧 Utilise le scaler: False
+
+📋 Caractéristiques:
+   - region_code
+   - departement_code
+   - weather_code
+   - temperature
+   - wind_speed
+   - mois
+   - jour
+   - heure
+
+==================================================
+Comparaison avec autres modèles:
+==================================================
+               Model       RMSE        MAE        R²         MSE
+7            XGBoost   3.788448   2.507894  0.968230   14.352342
+4      Random Forest   4.205188   2.982549  0.960857   17.683603
+5  Gradient Boosting   4.271887   3.338685  0.959605   18.249019
+6      Decision Tree   4.608886   2.666667  0.952980   21.241830
+0  Linear Regression   9.623799   7.632110  0.794987   92.617513
+1              Ridge   9.633351   7.637065  0.794580   92.801446
+2              Lasso  10.314664   8.099024  0.764496  106.392298
+3         ElasticNet  12.739002  10.276689  0.640781  162.282165

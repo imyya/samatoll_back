@@ -3,7 +3,7 @@ import os
 load_dotenv()
 from fastapi import FastAPI
 from app.db.database import Base, engine
-from app.models import user
+from app.models import user, notifications as notifications_model
 from app.routers import users, notifications, humidity
 from apscheduler.schedulers.background import BackgroundScheduler
 from twilio.rest import Client
@@ -11,6 +11,7 @@ from app.ml.predictor import fetch_weather_dakar, predict_humidity
 from app.core.scheduler import check_humidity_periodically
 app = FastAPI()
 Base.metadata.create_all(bind=engine)
+
 
 
 #   app.include_router(users.router)
@@ -61,7 +62,7 @@ scheduler = BackgroundScheduler()
 scheduler.add_job(
     func=check_humidity_periodically,
     trigger="interval",
-    hours=1  
+     hours=1  
 )
 scheduler.start()
 
